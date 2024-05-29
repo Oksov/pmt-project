@@ -1,8 +1,8 @@
 module "security_group" {
-  source      = "../modules/sg"
-  name        = "example-sg"
-  description = "Security Group for example"
-  vpc_id      = "vpc-0abcd1234abcd1234" # Replace with your VPC ID
+  source      = "../../modules/sg"
+  name        = "${var.environment}-sg"
+  description = "Security Group for ${var.environment} environment"
+  vpc_id      = var.vpc_id
 
   ingress_rules = [
     {
@@ -21,9 +21,5 @@ module "security_group" {
     }
   ]
 
-  tags = locals.tags
-}
-
-output "security_group_id" {
-  value = module.security_group.security_group_id
+  tags = local.tags
 }

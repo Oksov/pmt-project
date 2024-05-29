@@ -1,6 +1,12 @@
+variable "environment" {}
+
+variable "subnet_id" {}
 variable "ami_id" {
   type    = string
-  default = data.aws_ami.ubuntu.id
+}
+
+variable "instance_name" {
+  type    = string
 }
 
 variable "instance_type" {
@@ -25,6 +31,7 @@ variable "volume_size" {
 
 variable "key_name" {}
 
+variable "vpc_security_group_ids" {}
 variable "tags" {
   type        = map(string)
   default     = {}

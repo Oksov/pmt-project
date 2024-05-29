@@ -1,31 +1,31 @@
-variable "ami_id" {
-  type    = string
-  default = data.aws_ami.ubuntu.id
+variable "name" {
+  description = "Name of the security group"
+  type        = string
 }
 
-variable "instance_type" {
-  type    = string
-  default = "t2.micro"
+variable "description" {
+  description = "Description of the security group"
+  type        = string
 }
 
-variable "instance_count" {
-  type    = number
-  default = 1
+variable "vpc_id" {
+  description = "VPC ID where the security group will be created"
+  type        = string
 }
 
-variable "volume_type" {
-  type =  string
-  default = "gp3"
+variable "ingress_rules" {
+  description = "List of ingress rules"
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    description = string
+    cidr_blocks = list(string)
+  }))
 }
-
-variable "volume_size" {
-  type =  number
-  default = 10
-}
-
-variable "key_name" {}
 
 variable "tags" {
+  description = "Tags to apply to the security group"
   type        = map(string)
   default     = {}
 }

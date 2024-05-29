@@ -1,4 +1,4 @@
 module "rsa" {
-  source   = "../modules/sg"
-  key_name = "development-rsa"
+  source   = "../../modules/rsa"
+  key_name = "${var.environment}-development-rsa"
 }

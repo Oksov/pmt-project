@@ -1,3 +1,4 @@
+variable "subnet_id" {}
 variable "environment" {
   type = string
   default = "dev"
@@ -6,11 +7,6 @@ variable "environment" {
 variable "project" {
   type = string
   default = "paymentop"
-}
-
-variable "ami_id" {
-  type    = string
-  default = data.aws_ami.ubuntu.id
 }
 
 variable "instance_type" {
@@ -33,5 +29,8 @@ variable "volume_size" {
   default = 10
 }
 
-variable "key_name" {}
+variable "vpc_id" {
+  description = "VPC ID where the security group will be created"
+  type        = string
+}
 
