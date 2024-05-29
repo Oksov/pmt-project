@@ -1,3 +1,4 @@
+```
 variable "environment" {}
 
 variable "subnet_id" {}
@@ -67,6 +68,7 @@ variable "ingress_rules" {
   }))
 }
 
+```
 
 
 
@@ -75,7 +77,7 @@ variable "ingress_rules" {
 
 На рахунок цього не зовсім зрозумів задачу, поки шо я стикався шоб S3 використовувався як backend то тільки для сторінга тераформ стейтів в S3 через DynamoDB а також для використовування дати в модулях, наприклад:
 
-
+```
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
@@ -86,9 +88,11 @@ data "terraform_remote_state" "vpc" {
 }
 
 
-terraform_remote_state_vpc = data.terraform_remote_state.vpc.outputs
-vpc_id                     = local.terraform_remote_state_vpc.vpc_id
-vpc_cidr                   = local.terraform_remote_state_vpc.vpc_cidr_block
-public_subnets             = local.terraform_remote_state_vpc.public_subnets
-private_subnets            = local.terraform_remote_state_vpc.private_subnets
-database_subnets           = local.terraform_remote_state_vpc.database_subnets
+locals {
+  terraform_remote_state_vpc = data.terraform_remote_state.vpc.outputs
+  vpc_id                     = local.terraform_remote_state_vpc.vpc_id
+  vpc_cidr                   = local.terraform_remote_state_vpc.vpc_cidr_block
+  public_subnets             = local.terraform_remote_state_vpc.public_subnets
+  private_subnets            = local.terraform_remote_state_vpc.private_subnets
+  database_subnets           = local.terraform_remote_state_vpc.database_subnets
+}
